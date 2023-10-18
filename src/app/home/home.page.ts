@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  users: any;
 
-  constructor() {}
-
+  constructor(private httpClient:HttpClient) {
+    this.users = this.httpClient.get('https://randomuser.me/api/?results=20').pipe(map((res:any)=>res['results']))
+  }
 }
